@@ -54,11 +54,14 @@ class CoursesController < ApplicationController
   def add_students
     @course = Course.find(params[:course_id])
     actual_students_on_class = CourseStudent.where(course_id: params[:course_id])
-    @mierda = actual_students_on_class.count
+
+    if params[:student_id]
+      CourseStudent.create(course_id: params[:course_id],  person_id: params[:student_id])
+    end
 
     students_a_mostrar =  Array.new
-    agrega = 1
     for student in Person.all
+      agrega = 1
       for student_b in actual_students_on_class
         if student.id == student_b.person_id
           agrega = 0
@@ -69,10 +72,6 @@ class CoursesController < ApplicationController
       end
     end
     @students = students_a_mostrar
-
-    if params[:student_id] && agrega == 1
-      CourseStudent.create(course_id: params[:course_id],  person_id: params[:student_id])
-    end
   end
   # DELETE /courses/1
   # DELETE /courses/1.json

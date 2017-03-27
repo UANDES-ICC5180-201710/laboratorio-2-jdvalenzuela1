@@ -1,20 +1,45 @@
+<h1> Details </h1>
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @course.title %>
-</p>
+<table>
+  <thead>
+    <p> Teacher </p>
+    <tr>
+      <th>Name</th>
+      <th>Last name</th>
+      <th>Email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
-<p>
-  <strong>Code:</strong>
-  <%= @course.code %>
-</p>
+  <tbody>
+    <tr>
+      <td><%= @course.person.first_name %></td>
+      <td><%= @course.person.last_name  %></td>
+      <td><%= @course.person.email  %></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>
-  <strong>Person:</strong>
-  <%= @course.person.id %>
-</p>
-<!--<%= link_to 'Add Student', add_students_path, {:id => @course.id }%>-->
+<table>
+  <thead>
+    <p> Alumnos </p>
+    <tr>
+      <th>id</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @actual_students_on_class.each  do |student| %>
+      <tr>
+        <td><%= student.id %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
 <%= link_to "Add Student", {:controller => "courses", :action => "add_students", :course_id =>@course.id }%>
 <%= link_to 'Edit', edit_course_path(@course) %>
 <%= link_to 'Back', courses_path %>

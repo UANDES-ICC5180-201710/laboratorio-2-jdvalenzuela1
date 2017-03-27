@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @course.title %>
+</p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @course.code %>
+</p>
+
+<p>
+  <strong>Person:</strong>
+  <%= @course.person.id %>
+</p>
+<!--<%= link_to 'Add Student', add_students_path, {:id => @course.id }%>-->
+<%= link_to "Add Student", {:controller => "courses", :action => "add_students", :course_id =>@course.id }%>
+<%= link_to 'Edit', edit_course_path(@course) %>
+<%= link_to 'Back', courses_path %>
